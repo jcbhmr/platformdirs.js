@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "Node16",
+		"lib": ["ES2022"],
+		"strict": true,
+		"skipLibCheck": true,
+		"outDir": "./dist",
+		"resolveJsonModule": true
+	},
+	"include": ["src"]
+}
