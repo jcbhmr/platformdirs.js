@@ -4,6 +4,10 @@ import * as path from "node:path";
 import process from "node:process";
 import { PlatformDirsABC } from "./api.js";
 
+function throw2(error: unknown): never {
+	throw error;
+}
+
 function expanduser(path2: string): string {
 	return path2.replace(/^~/, os.homedir());
 }
@@ -124,12 +128,9 @@ export class Unix extends PlatformDirsABC {
 				process.platform === "netbsd" ||
 				process.platform === "openbsd"
 			) {
-				if (!process.getuid) {
-					throw new Error("unreachable");
-				}
-				path2 = `/var/run/user/${process.getuid()}`;
+				path2 = `/var/run/user/${(process.getuid ?? throw2(new Error("unreachable")))()}`;
 				if (!fs.existsSync(path2)) {
-					path2 = `/tmp/runtime-${process.getuid()}`;
+					path2 = `/tmp/runtime-${(process.getuid ?? throw2(new Error("unreachable")))()}`;
 				}
 			} else {
 				path2 = `/run/user/${process.getuid?.() ?? 0}`;

@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
+		// Node.js v18 supports ES2022
 		"target": "ES2022",
-		"module": "Node16",
 		"lib": ["ES2022"],
+		"module": "Node16",
 		"strict": true,
 		"skipLibCheck": true,
-		"outDir": "./dist",
-		"resolveJsonModule": true
+		"declaration": true,
+		"outDir": "./dist"
 	},
-	"include": ["src"]
+	"include": ["./src"]
 }

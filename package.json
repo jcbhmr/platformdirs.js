@@ -18,8 +18,8 @@
 	"bin": "./dist/main.js",
 	"files": ["dist"],
 	"scripts": {
-		"format": "biome format --write .",
 		"build": "tsc --noCheck",
+		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
 		"test": "tsx --test"
 	},
