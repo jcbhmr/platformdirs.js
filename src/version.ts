@@ -1,11 +1,7 @@
-import * as fs from "node:fs/promises";
+// Cannot `import packageJSON from "../package.json"` since that would change
+// the root TypeScript directory from the `./src` folder to the `./` folder
+// which then nests everything weirdly. This is just easier for now. If you, the
+// reader, have a better solution please enlighten me!
 
-const packageJSONText = await fs.readFile(
-	new URL(import.meta.resolve("../package.json")),
-	"utf-8",
-);
-const packageJSON = JSON.parse(packageJSONText) as { version: string };
-
-export const version = packageJSON.version;
-// export const versionTuple = packageJSON.version.match(/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/)!.map(x => Number.isNaN(+x) ? x : +x);
-export const versionTuple = packageJSON.version.split(".").map((x) => +x);
+export const version = "4.3.6";
+export const versionTuple = version.split(".").map((x) => +x);

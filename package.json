@@ -1,11 +1,22 @@
 {
 	"name": "platformdirs",
 	"version": "4.3.6",
-	"description": "",
-	"keywords": [],
+	"description": "📂 Unified interface to get platform-specific directories",
+	"keywords": [
+		"nodejs",
+		"port",
+		"xdg",
+		"xdg-basedir",
+		"bun",
+		"deno",
+		"appdirs",
+		"known-folders",
+		"platformdirs"
+	],
 	"repository": "github:jcbhmr/platformdirs.js",
 	"license": "MIT",
 	"author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me)",
+	"homepage": "https://www.jsdocs.io/package/platformdirs",
 	"type": "module",
 	"exports": {
 		".": "./dist/index.js",

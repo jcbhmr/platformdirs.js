@@ -22,7 +22,7 @@ console.log(userLogDir("my-app", "gopher", "7.8.9"))
 </table>
 
 <p align=center>
-    <a href="https://tsdocs.dev/search/docs/platformdirs">Documentation</a>
+    <a href="https://jsdocs.io/package/platformdirs">Documentation</a>
     | <a href="https://pypi.org/project/platformdirs/">Original <code>platformdirs</code> project</a>
 </p>
 
@@ -32,24 +32,36 @@ console.log(userLogDir("my-app", "gopher", "7.8.9"))
 
 ## Installation
 
+![npm](https://img.shields.io/static/v1?style=for-the-badge&message=npm&color=CB3837&logo=npm&logoColor=FFFFFF&label=)
+
+You can install this package from [the npm registry](https://www.npmjs.com/) using npm, Yarn, pnpm, Bun, Deno, etc.
+
 ```sh
 npm install platformdirs
 ```
 
 ## Usage
 
+![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=5FA04E&logo=Node.js&logoColor=FFFFFF&label=)
+![Deno](https://img.shields.io/static/v1?style=for-the-badge&message=Deno&color=222222&logo=Deno&logoColor=70FFAF&label=)
+![Bun](https://img.shields.io/static/v1?style=for-the-badge&message=Bun&color=000000&logo=Bun&logoColor=FFFFFF&label=)
+![Windows](https://img.shields.io/static/v1?style=for-the-badge&message=Windows&color=0078D4&logo=Windows&logoColor=FFFFFF&label=)
+![Linux](https://img.shields.io/static/v1?style=for-the-badge&message=Linux&color=222222&logo=Linux&logoColor=FCC624&label=)
+![macOS](https://img.shields.io/static/v1?style=for-the-badge&message=macOS&color=000000&logo=macOS&logoColor=FFFFFF&label=)
+
+
 ```js
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
+import * as stream from "node:stream";
 import * as platformdirs from "platformdirs";
 
 const cacheDir = platformdirs.userCacheDir("awesome-app", "octocat", "1.2.3")
 const bigCSVPath = path.join(cacheDir, "big.csv");
 if (!fs.existsSync(bigCSVPath)) {
     const response = await fetch("https://example.com/big.csv");
-    const file = stream.Writable.toWeb(fs.createWriteStream(bigCSVPath))
-    await response.body.pipeTo(file);
+    await response.body.pipeTo(stream.Writable.toWeb(fs.createWriteStream(bigCSVPath)));
 }
 ```
 
-📚 For more information check out [the documentation](https://tsdocs.dev/search/docs/platformdirs)
+📚 For more information check out [the documentation](https://jsdocs.io/package/platformdirs)
