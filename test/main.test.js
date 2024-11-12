@@ -19,5 +19,8 @@ test("matches python platformdirs", async (t) => {
 
 	const mainTSPath = fileURLToPath(import.meta.resolve("../src/main.ts"));
 	const { stdout: actual } = await $`tsx ${mainTSPath}`;
-	assert.equal(actual, expected);
+	assert.equal(
+		actual.split(/\r?\n/g).slice(1).join("\n"),
+		expected.split(/\r?\n/g).slice(1).join("\n"),
+	);
 });

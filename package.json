@@ -1,6 +1,6 @@
 {
 	"name": "platformdirs",
-	"version": "4.3.6",
+	"version": "4.3.6-rc1",
 	"description": "📂 Unified interface to get platform-specific directories",
 	"keywords": [
 		"nodejs",
@@ -13,10 +13,13 @@
 		"known-folders",
 		"platformdirs"
 	],
-	"repository": "github:jcbhmr/platformdirs.js",
+	"homepage": "https://www.jsdocs.io/package/platformdirs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jcbhmr/platformdirs.js.git"
+	},
 	"license": "MIT",
 	"author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me)",
-	"homepage": "https://www.jsdocs.io/package/platformdirs",
 	"type": "module",
 	"exports": {
 		".": "./dist/index.js",
@@ -26,14 +29,16 @@
 		"./unix": "./dist/unix.js",
 		"./version": "./dist/version.js"
 	},
-	"bin": "./dist/main.js",
+	"bin": {
+		"platformdirs": "dist/main.js"
+	},
 	"files": ["dist"],
 	"scripts": {
 		"build": "tsc --noCheck",
 		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
-		"test": "tsx --test",
-		"run": "tsx src/main.ts"
+		"run": "tsx src/main.ts",
+		"test": "tsx --test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
