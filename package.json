@@ -1,6 +1,6 @@
 {
 	"name": "platformdirs",
-	"version": "4.3.6",
+	"version": "4.3.7",
 	"description": "📂 Unified interface to get platform-specific directories",
 	"keywords": [
 		"nodejs",
@@ -40,7 +40,8 @@
 		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
 		"run": "tsx src/main.ts",
-		"test": "tsx --test"
+		"test": "tsx --test",
+		"prepack": "npm run build"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
