@@ -54,9 +54,9 @@ npm install platformdirs
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import * as stream from "node:stream";
-import * as platformdirs from "platformdirs";
+import { userCacheDir } from "platformdirs";
 
-const cacheDir = platformdirs.userCacheDir("awesome-app", "octocat", "1.2")
+const cacheDir = userCacheDir("awesome-app", "octocat", "1.2")
 const bigCSVPath = path.join(cacheDir, "big.csv");
 if (!fs.existsSync(bigCSVPath)) {
     const response = await fetch("https://example.com/big.csv");
@@ -66,7 +66,7 @@ if (!fs.existsSync(bigCSVPath)) {
 
 📚 For more information check out [the documentation](https://jsdocs.io/package/platformdirs)
 
-You can quickly dump all the directories for the current environment by running the included `platformdirs` CLI command. This is hepful for finding out where `dirs.userConfigDir` actually saved your file.
+You can quickly dump all the directories for the current environment by running the included `platformdirs` CLI command. This is helpful for quickly determining what `dirs.userConfigDir` and friends return.
 
 ```sh
 npx platformdirs
@@ -75,7 +75,7 @@ npx platformdirs
 <details><summary>Output on Windows</summary>
 
 ```
-
+TODO
 ```
 
 </details>
@@ -83,7 +83,7 @@ npx platformdirs
 <details><summary>Output on macOS</summary>
 
 ```
-
+TODO
 ```
 
 </details>
