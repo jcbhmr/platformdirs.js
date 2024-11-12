@@ -1,6 +1,10 @@
 /**
  * @module
  *
+ * platformdirs is a library to determine platform-specific system directories. This includes directories where to place cache files, user data, configuration, etc.
+ *
+ * The source code and issue tracker are both hosted on [GitHub](https://github.com/jcbhmr/platformdirs.js).
+ *
  * Utilities for determining application-specific dirs.
  *
  * See https://github.com/platformdirs/platformdirs for details and usage.

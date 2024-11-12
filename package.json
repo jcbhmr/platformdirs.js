@@ -32,7 +32,8 @@
 		"build": "tsc --noCheck",
 		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
-		"test": "tsx --test"
+		"test": "tsx --test",
+		"run": "tsx src/main.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",

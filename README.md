@@ -7,16 +7,16 @@
 <div><sub><i>Running on Linux</i></sub></div>
 
 ```js
-const dirs = new PlatformDirs("awesome-app", "octocat", "1.2.3")
+const dirs = new PlatformDirs("awesome-app", "octocat", "1.2")
 console.log(dirs.userDataDir)
-//=> /home/jcbhmr/.local/share/awesome-app/1.2.3
+//=> /home/jcbhmr/.local/share/awesome-app/1.2
 console.log(dirs.userConfigDir)
-//=> /home/jcbhmr/.config/awesome-app/1.2.3
+//=> /home/jcbhmr/.config/awesome-app/1.2
 
-console.log(userRuntimeDir("other-app", "ferris", "4.5.6"))
-//=> /run/user/33333/other-app/4.5.6
-console.log(userLogDir("my-app", "gopher", "7.8.9"))
-//=> /home/jcbhmr/.local/state/my-app/7.8.9/log
+console.log(userRuntimeDir("other-app", "ferris", "4.5"))
+//=> /run/user/33333/other-app/4.5
+console.log(userLogDir("my-app", "gopher", "7.8"))
+//=> /home/jcbhmr/.local/state/my-app/7.8/log
 ```
 
 </table>
@@ -56,7 +56,7 @@ import * as path from "node:path";
 import * as stream from "node:stream";
 import * as platformdirs from "platformdirs";
 
-const cacheDir = platformdirs.userCacheDir("awesome-app", "octocat", "1.2.3")
+const cacheDir = platformdirs.userCacheDir("awesome-app", "octocat", "1.2")
 const bigCSVPath = path.join(cacheDir, "big.csv");
 if (!fs.existsSync(bigCSVPath)) {
     const response = await fetch("https://example.com/big.csv");
@@ -65,3 +65,106 @@ if (!fs.existsSync(bigCSVPath)) {
 ```
 
 📚 For more information check out [the documentation](https://jsdocs.io/package/platformdirs)
+
+```sh
+npx platformdirs
+```
+
+<details><summary>Output on Windows</summary>
+
+```
+
+```
+
+</details>
+
+<details><summary>Output on macOS</summary>
+
+```
+
+```
+
+</details>
+
+<details><summary>Output on Linux</summary>
+
+```
+-- platformdirs 4.3.6 --
+-- app dirs (with optional 'version')
+user_data_dir: /home/me/.local/share/MyApp/1.0
+user_config_dir: /home/me/.config/MyApp/1.0
+user_cache_dir: /home/me/.cache/MyApp/1.0
+user_state_dir: /home/me/.local/state/MyApp/1.0
+user_log_dir: /home/me/.local/state/MyApp/1.0/log
+user_documents_dir: /home/me/Documents
+user_downloads_dir: /home/me/Downloads
+user_pictures_dir: /home/me/Pictures
+user_videos_dir: /home/me/Videos
+user_music_dir: /home/me/Music
+user_runtime_dir: /run/user/1000/MyApp/1.0
+site_data_dir: /usr/local/share/MyApp/1.0
+site_config_dir: /etc/xdg/MyApp/1.0
+site_cache_dir: /var/cache/MyApp/1.0
+site_runtime_dir: /run/MyApp/1.0
+
+-- app dirs (without optional 'version')
+user_data_dir: /home/me/.local/share/MyApp
+user_config_dir: /home/me/.config/MyApp
+user_cache_dir: /home/me/.cache/MyApp
+user_state_dir: /home/me/.local/state/MyApp
+user_log_dir: /home/me/.local/state/MyApp/log
+user_documents_dir: /home/me/Documents
+user_downloads_dir: /home/me/Downloads
+user_pictures_dir: /home/me/Pictures
+user_videos_dir: /home/me/Videos
+user_music_dir: /home/me/Music
+user_runtime_dir: /run/user/1000/MyApp
+site_data_dir: /usr/local/share/MyApp
+site_config_dir: /etc/xdg/MyApp
+site_cache_dir: /var/cache/MyApp
+site_runtime_dir: /run/MyApp
+
+-- app dirs (without optional 'appauthor')
+user_data_dir: /home/me/.local/share/MyApp
+user_config_dir: /home/me/.config/MyApp
+user_cache_dir: /home/me/.cache/MyApp
+user_state_dir: /home/me/.local/state/MyApp
+user_log_dir: /home/me/.local/state/MyApp/log
+user_documents_dir: /home/me/Documents
+user_downloads_dir: /home/me/Downloads
+user_pictures_dir: /home/me/Pictures
+user_videos_dir: /home/me/Videos
+user_music_dir: /home/me/Music
+user_runtime_dir: /run/user/1000/MyApp
+site_data_dir: /usr/local/share/MyApp
+site_config_dir: /etc/xdg/MyApp
+site_cache_dir: /var/cache/MyApp
+site_runtime_dir: /run/MyApp
+
+-- app dirs (with disabled 'appauthor')
+user_data_dir: /home/me/.local/share/MyApp
+user_config_dir: /home/me/.config/MyApp
+user_cache_dir: /home/me/.cache/MyApp
+user_state_dir: /home/me/.local/state/MyApp
+user_log_dir: /home/me/.local/state/MyApp/log
+user_documents_dir: /home/me/Documents
+user_downloads_dir: /home/me/Downloads
+user_pictures_dir: /home/me/Pictures
+user_videos_dir: /home/me/Videos
+user_music_dir: /home/me/Music
+user_runtime_dir: /run/user/1000/MyApp
+site_data_dir: /usr/local/share/MyApp
+site_config_dir: /etc/xdg/MyApp
+site_cache_dir: /var/cache/MyApp
+site_runtime_dir: /run/MyApp
+```
+
+</details>
+
+## Development
+
+![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=5FA04E&logo=Node.js&logoColor=FFFFFF&label=)
+![TypeScript](https://img.shields.io/static/v1?style=for-the-badge&message=TypeScript&color=3178C6&logo=TypeScript&logoColor=FFFFFF&label=)
+![Biome](https://img.shields.io/static/v1?style=for-the-badge&message=Biome&color=60A5FA&logo=Biome&logoColor=FFFFFF&label=)
+
+This project uses Node.js, TypeScript, and npm. Why Node.js instead of [Deno](https://deno.com/) & [JSR](https://jsr.io/)? Because it's not as popular (yet). I'd love to use Deno & JSR but nobody knows what they are. This project does use [Biome](https://biomejs.dev/) instead of the usual [Prettier](https://prettier.io/) & [ESLint](https://eslint.org/) combo. Why? Because ESLint bungled their v9 release and Biome offers a more cohesive linter & formatter solution.
