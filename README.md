@@ -66,6 +66,8 @@ if (!fs.existsSync(bigCSVPath)) {
 
 📚 For more information check out [the documentation](https://jsdocs.io/package/platformdirs)
 
+You can quickly dump all the directories for the current environment by running the included `platformdirs` CLI command. This is hepful for finding out where `dirs.userConfigDir` actually saved your file.
+
 ```sh
 npx platformdirs
 ```

@@ -1,6 +1,6 @@
 {
 	"name": "platformdirs",
-	"version": "4.3.6-rc1",
+	"version": "4.3.6",
 	"description": "📂 Unified interface to get platform-specific directories",
 	"keywords": [
 		"nodejs",
@@ -32,7 +32,9 @@
 	"bin": {
 		"platformdirs": "dist/main.js"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsc --noCheck",
 		"format": "biome format --write .",
