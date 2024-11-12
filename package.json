@@ -13,7 +13,7 @@
 		"known-folders",
 		"platformdirs"
 	],
-	"homepage": "https://www.jsdocs.io/package/platformdirs",
+	"homepage": "https://jsdocs.io/package/platformdirs",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jcbhmr/platformdirs.js.git"
