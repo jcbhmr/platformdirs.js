@@ -33,6 +33,9 @@ console.log(userLogDir("my-app", "gopher", "7.8"))
 ## Installation
 
 ![npm](https://img.shields.io/static/v1?style=for-the-badge&message=npm&color=CB3837&logo=npm&logoColor=FFFFFF&label=)
+![pnpm](https://img.shields.io/static/v1?style=for-the-badge&message=pnpm&color=222222&logo=pnpm&logoColor=F69220&label=)
+![Bun](https://img.shields.io/static/v1?style=for-the-badge&message=Bun&color=000000&logo=Bun&logoColor=FFFFFF&label=)
+![Deno](https://img.shields.io/static/v1?style=for-the-badge&message=Deno&color=222222&logo=Deno&logoColor=70FFAF&label=)
 
 You can install this package from [the npm registry](https://www.npmjs.com/) using npm, Yarn, pnpm, Bun, Deno, etc.
 
