@@ -172,6 +172,6 @@ site_runtime_dir: /run/MyApp
 ![TypeScript](https://img.shields.io/static/v1?style=for-the-badge&message=TypeScript&color=3178C6&logo=TypeScript&logoColor=FFFFFF&label=)
 ![Biome](https://img.shields.io/static/v1?style=for-the-badge&message=Biome&color=60A5FA&logo=Biome&logoColor=FFFFFF&label=)
 
-This project uses Node.js, TypeScript, and npm. Why Node.js instead of [Deno](https://deno.com/) & [JSR](https://jsr.io/)? Because it's not as popular (yet). I'd love to use Deno & JSR but nobody knows what they are. This project does use [Biome](https://biomejs.dev/) instead of the usual [Prettier](https://prettier.io/) & [ESLint](https://eslint.org/) combo. Why? Because ESLint bungled their v9 release and Biome offers a more cohesive linter & formatter solution.
+This project uses Node.js, npm, TypeScript, and [Biome](https://biomejs.dev/) instead of the usual [Prettier](https://prettier.io/) & [ESLint](https://eslint.org/) combo. Why? Because ESLint bungled their v9 release and Biome offers a more cohesive linter & formatter solution.
 
-For package releases make sure to always release a `-rc1` version first. If it's 100% OK then proceed to release it as normal. The goal is to keep the `npm:platformdirs@X.Y.Z` package in sync with `pip:platformdirs@X.Y.Z`.
+For package releases make sure to always release a `-rc1` version first. If it's 100% OK then proceed to release it as normal. The goal is to keep the npm `platformdirs@X.Y.Z` package in sync with PyPI `platformdirs==X.Y.Z`.
