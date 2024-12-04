@@ -22,7 +22,7 @@ console.log(userLogDir("my-app", "gopher", "7.8"))
 </table>
 
 <p align=center>
-    <a href="https://jsdocs.io/package/platformdirs">Documentation</a>
+    <a href="https://tsdocs.dev/docs/platformdirs">Documentation</a>
     | <a href="https://pypi.org/project/platformdirs/">Original <code>platformdirs</code> project</a>
 </p>
 
@@ -67,7 +67,7 @@ if (!fs.existsSync(bigCSVPath)) {
 }
 ```
 
-📚 For more information check out [the documentation](https://jsdocs.io/package/platformdirs)
+📚 For more information check out [the documentation](https://tsdocs.dev/docs/platformdirs)
 
 You can quickly dump all the directories for the current environment by running the included `platformdirs` CLI command. This is helpful for quickly determining what `dirs.userConfigDir` and friends return.
 
