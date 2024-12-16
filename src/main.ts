@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { PlatformDirs, version } from "./index.js";
 
 const props: Record<string, keyof PlatformDirs> = {
