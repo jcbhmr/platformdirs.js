@@ -242,3 +242,5 @@ site_runtime_dir: /run/MyApp
 This project uses Node.js, npm, TypeScript, and [Biome](https://biomejs.dev/) instead of the usual [Prettier](https://prettier.io/) & [ESLint](https://eslint.org/) combo. Why? Because ESLint bungled their v9 release and Biome offers a more cohesive linter & formatter solution.
 
 For package releases make sure to always release a `-rc1` version first. If it's 100% OK then proceed to release it as normal. The goal is to keep the npm `platformdirs@X.Y.Z` package in sync with PyPI `platformdirs==X.Y.Z`.
+
+So far I have failed at this and now I'm two patch versions _ahead_ of the Python package. Oopsies.
