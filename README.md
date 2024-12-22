@@ -4,8 +4,6 @@
 
 <table align=center><td>
 
-<div><sub><i>Running on Linux</i></sub></div>
-
 ```js
 const dirs = new PlatformDirs("awesome-app", "octocat", "1.2")
 console.log(dirs.userDataDir)
