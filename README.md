@@ -43,6 +43,8 @@ You can install this package from [the npm registry](https://www.npmjs.com/) usi
 npm install platformdirs
 ```
 
+This package works with Node.js, Deno, and Bun. It is not intended to be used in the browser.
+
 ## Usage
 
 ![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=5FA04E&logo=Node.js&logoColor=FFFFFF&label=)
@@ -78,7 +80,74 @@ npx platformdirs
 <details><summary>Output on Windows</summary>
 
 ```
-TODO
+-- platformdirs 4.3.7 --
+-- app dirs (with optional 'version')
+user_data_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\1.0
+user_config_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\1.0
+user_cache_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\Cache\1.0
+user_state_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\1.0
+user_log_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\1.0\Logs
+user_documents_dir: C:\Users\me\Documents
+user_downloads_dir: C:\Users\me\Downloads
+user_pictures_dir: C:\Users\me\Pictures
+user_videos_dir: C:\Users\me\Videos
+user_music_dir: C:\Users\me\Music
+user_runtime_dir: C:\Users\me\AppData\Local\Temp\MyCompany\MyApp\1.0
+site_data_dir: C:\ProgramData\MyCompany\MyApp\1.0
+site_config_dir: C:\ProgramData\MyCompany\MyApp\1.0
+site_cache_dir: C:\ProgramData\MyCompany\MyApp\Cache\1.0
+site_runtime_dir: C:\Users\me\AppData\Local\Temp\MyCompany\MyApp\1.0
+
+-- app dirs (without optional 'version')
+user_data_dir: C:\Users\me\AppData\Local\MyCompany\MyApp
+user_config_dir: C:\Users\me\AppData\Local\MyCompany\MyApp
+user_cache_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\Cache
+user_state_dir: C:\Users\me\AppData\Local\MyCompany\MyApp
+user_log_dir: C:\Users\me\AppData\Local\MyCompany\MyApp\Logs
+user_documents_dir: C:\Users\me\Documents
+user_downloads_dir: C:\Users\me\Downloads
+user_pictures_dir: C:\Users\me\Pictures
+user_videos_dir: C:\Users\me\Videos
+user_music_dir: C:\Users\me\Music
+user_runtime_dir: C:\Users\me\AppData\Local\Temp\MyCompany\MyApp
+site_data_dir: C:\ProgramData\MyCompany\MyApp
+site_config_dir: C:\ProgramData\MyCompany\MyApp
+site_cache_dir: C:\ProgramData\MyCompany\MyApp\Cache
+site_runtime_dir: C:\Users\me\AppData\Local\Temp\MyCompany\MyApp
+
+-- app dirs (without optional 'appauthor')
+user_data_dir: C:\Users\me\AppData\Local\MyApp\MyApp
+user_config_dir: C:\Users\me\AppData\Local\MyApp\MyApp
+user_cache_dir: C:\Users\me\AppData\Local\MyApp\MyApp\Cache
+user_state_dir: C:\Users\me\AppData\Local\MyApp\MyApp
+user_log_dir: C:\Users\me\AppData\Local\MyApp\MyApp\Logs
+user_documents_dir: C:\Users\me\Documents
+user_downloads_dir: C:\Users\me\Downloads
+user_pictures_dir: C:\Users\me\Pictures
+user_videos_dir: C:\Users\me\Videos
+user_music_dir: C:\Users\me\Music
+user_runtime_dir: C:\Users\me\AppData\Local\Temp\MyApp\MyApp
+site_data_dir: C:\ProgramData\MyApp\MyApp
+site_config_dir: C:\ProgramData\MyApp\MyApp
+site_cache_dir: C:\ProgramData\MyApp\MyApp\Cache
+site_runtime_dir: C:\Users\me\AppData\Local\Temp\MyApp\MyApp
+
+-- app dirs (with disabled 'appauthor')
+user_data_dir: C:\Users\me\AppData\Local\MyApp
+user_config_dir: C:\Users\me\AppData\Local\MyApp
+user_cache_dir: C:\Users\me\AppData\Local\MyApp\Cache
+user_state_dir: C:\Users\me\AppData\Local\MyApp
+user_log_dir: C:\Users\me\AppData\Local\MyApp\Logs
+user_documents_dir: C:\Users\me\Documents
+user_downloads_dir: C:\Users\me\Downloads
+user_pictures_dir: C:\Users\me\Pictures
+user_videos_dir: C:\Users\me\Videos
+user_music_dir: C:\Users\me\Music
+user_runtime_dir: C:\Users\me\AppData\Local\Temp\MyApp
+site_data_dir: C:\ProgramData\MyApp
+site_config_dir: C:\ProgramData\MyApp
+site_cache_dir: C:\ProgramData\MyApp\Cache
+site_runtime_dir: C:\Users\me\AppData\Local\Temp\MyApp
 ```
 
 </details>

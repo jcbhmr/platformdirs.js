@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { PlatformDirs, version } from "./index.js";
 
-const props: Record<string, keyof PlatformDirs> = {
+/** @type {Record<string, keyof PlatformDirs>} */
+const props = {
 	user_data_dir: "userDataDir",
 	user_config_dir: "userConfigDir",
 	user_cache_dir: "userCacheDir",
