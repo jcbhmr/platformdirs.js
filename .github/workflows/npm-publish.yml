@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
       - run: npm ci
       - run: npm test
 

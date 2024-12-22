@@ -5,7 +5,7 @@ import which from "which";
 
 test("matches python platformdirs", async (t) => {
 	// https://docs.astral.sh/uv/getting-started/installation/
-	if (!(await which("uv"))) {
+	if (!(await which("uv", { nothrow: true }))) {
 		t.skip("uv not found");
 		return;
 	}
