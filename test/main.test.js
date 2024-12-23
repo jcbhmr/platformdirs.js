@@ -13,7 +13,7 @@ test("matches python platformdirs", async (t) => {
 	// Strip first line which has version info like "-- platformdirs 1.2.3 --".
 	const expected = (
 		await $`uv run --with platformdirs python -m platformdirs`
-	).stdout.replace(/^.*/m, "");
-	const actual = (await $`node src/main.js`).stdout.replace(/^.*/m, "");
+	).stdout.replace(/^.*\n/, "");
+	const actual = (await $`node src/main.js`).stdout.replace(/^.*\n/, "");
 	assert.equal(actual, expected);
 });
