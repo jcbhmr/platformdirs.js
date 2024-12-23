@@ -19,7 +19,8 @@ import process from "node:process";
  * @import { Windows } from "./windows.js";
  */
 
-/** @type {typeof Windows | typeof MacOS | typeof Unix} */
+// Pyright assumes `sys.platform` is `""`, so it hits the else block.
+/** @type {typeof Unix} */
 let Result;
 if (process.platform === "win32") {
 	({ Windows: Result } = await import("./windows.js"));
@@ -51,11 +52,13 @@ async function setPlatformDirClass() {
 	return Result;
 }
 
-/** @typedef {Windows | MacOS | Unix | Android} PlatformDirs */
+// There's a type-only workaround that sets "Unix" as the default type for PlatformDirs.
+/** @typedef {Unix} PlatformDirs */
 
-/** @type {typeof Windows | typeof MacOS | typeof Unix | typeof Android} */
+/** @type {typeof Unix} */
 export const PlatformDirs = await setPlatformDirClass();
 
+/** @type {typeof Unix} */
 export const AppDirs = PlatformDirs;
 
 /**
