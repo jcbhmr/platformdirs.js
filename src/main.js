@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/**
+ * @module
+ * Main entry point.
+ */
+
 import { PlatformDirs, version } from "./index.js";
 
 /** @type {Record<string, keyof PlatformDirs>} */
