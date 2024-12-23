@@ -7,7 +7,7 @@
  *
  * Utilities for determining application-specific dirs.
  *
- * See https://github.com/platformdirs/platformdirs for details and usage.
+ * See https://github.com/jcbhmr/platformdirs.js for details and usage.
  */
 
 import process from "node:process";
