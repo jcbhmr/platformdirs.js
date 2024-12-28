@@ -5,7 +5,7 @@
 
 import * as path from "node:path";
 import process from "node:process";
-import { PlatformDirsABC } from "./api.js";
+import { PlatformDirsABC } from "./api.ts";
 
 /**
  * [MSDN on where to store app data
@@ -18,22 +18,15 @@ import { PlatformDirsABC } from "./api.js";
  */
 export class Windows extends PlatformDirsABC {
 	/**
-	 * @return {string} data directory tied to the user, e.g. `%USERPROFILE%\AppData\Local\$appauthor\$appname` (not roaming) or `%USERPROFILE%\AppData\Roaming\$appauthor\$appname` (roaming)
-	 * @override
+	 * @return data directory tied to the user, e.g. `%USERPROFILE%\AppData\Local\$appauthor\$appname` (not roaming) or `%USERPROFILE%\AppData\Roaming\$appauthor\$appname` (roaming)
 	 */
-	get userDataDir() {
+	override get userDataDir(): string {
 		const const2 = this.roaming ? "CSIDL_APPDATA" : "CSIDL_LOCAL_APPDATA";
 		const path2 = path.normalize(getWinFolder(const2));
 		return this._appendParts(path2);
 	}
 
-	/**
-	 * @protected
-	 * @param {string} path2
-	 * @param {{ opinionValue?: string | undefined }} [param1]
-	 * @return {string}
-	 */
-	_appendParts(path2, { opinionValue } = {}) {
+	protected _appendParts(path2: string, { opinionValue }: { opinionValue?: string | undefined; } = {}): string {
 		const params = [];
 		if (this.appname) {
 			if (this.appauthor !== false) {
@@ -54,61 +47,54 @@ export class Windows extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} data directory shared by users, e.g. `C:\ProgramData\$appauthor\$appname`
-	 * @override
+	 * @return data directory shared by users, e.g. `C:\ProgramData\$appauthor\$appname`
 	 */
-	get siteDataDir() {
+	override get siteDataDir(): string {
 		const path2 = path.normalize(getWinFolder("CSIDL_COMMON_APPDATA"));
 		return this._appendParts(path2);
 	}
 
 	/**
-	 * @override
-	 * @return {string} config directory tied to the user, same as `userDataDir`
+	 * @return config directory tied to the user, same as `userDataDir`
 	 */
-	get userConfigDir() {
+	override get userConfigDir(): string {
 		return this.userDataDir;
 	}
 
 	/**
-	 * @return {string} config directory shared by users, same as `siteDataDir`
-	 * @override
+	 * @return config directory shared by users, same as `siteDataDir`
 	 */
-	get siteConfigDir() {
+	override get siteConfigDir(): string {
 		return this.siteDataDir;
 	}
 
 	/**
-	 * @override
-	 * @return {string} cache directory tied to the user (if opinionated with `Cache` folder within `$appname`) e.g. `%USERPROFILE%\AppData\Local\$appauthor\$appname\Cache\$version`
+	 * @return cache directory tied to the user (if opinionated with `Cache` folder within `$appname`) e.g. `%USERPROFILE%\AppData\Local\$appauthor\$appname\Cache\$version`
 	 */
-	get userCacheDir() {
+	override get userCacheDir(): string {
 		const path2 = path.normalize(getWinFolder("CSIDL_LOCAL_APPDATA"));
 		return this._appendParts(path2, { opinionValue: "Cache" });
 	}
 
 	/**
-	 * @override
-	 * @return {string} cache directory shared by users, e.g. `C:\ProgramData\$appauthor\$appname\Cache\$version`
+	 * @return cache directory shared by users, e.g. `C:\ProgramData\$appauthor\$appname\Cache\$version`
 	 */
-	get siteCacheDir() {
+	override get siteCacheDir(): string {
 		const path2 = path.normalize(getWinFolder("CSIDL_COMMON_APPDATA"));
 		return this._appendParts(path2, { opinionValue: "Cache" });
 	}
 
 	/**
-	 * @override
-	 * @return {string} state directory tied to the user, same as `userDataDir`
+	 * @return state directory tied to the user, same as `userDataDir`
 	 */
-	get userStateDir() {
+	override get userStateDir(): string {
 		return this.userDataDir;
 	}
 
 	/**
-	 * @override
-	 * @return {string} log directory tied to the user, same as `userCacheDir` if not opinionated else `log` in it
+	 * @return log directory tied to the user, same as `userCacheDir` if not opinionated else `log` in it
 	 */
-	get userLogDir() {
+	override get userLogDir(): string {
 		let path2 = this.userDataDir;
 		if (this.opinion) {
 			path2 = path.join(path2, "Logs");
@@ -118,58 +104,51 @@ export class Windows extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} documents directory tied to the user, e.g. `%USERPROFILE%\Documents`
-	 * @override
+	 * @return documents directory tied to the user, e.g. `%USERPROFILE%\Documents`
 	 */
-	get userDocumentsDir() {
+	override get userDocumentsDir(): string {
 		return path.normalize(getWinFolder("CSIDL_PERSONAL"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} downloads directory tied to the user, e.g. `%USERPROFILE%\Downloads`
+	 * @return downloads directory tied to the user, e.g. `%USERPROFILE%\Downloads`
 	 */
-	get userDownloadsDir() {
+	override get userDownloadsDir(): string {
 		return path.normalize(getWinFolder("CSIDL_DOWNLOADS"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} pictures directory tied to the user, e.g. `%USERPROFILE%\Pictures`
+	 * @return pictures directory tied to the user, e.g. `%USERPROFILE%\Pictures`
 	 */
-	get userPicturesDir() {
+	override get userPicturesDir(): string {
 		return path.normalize(getWinFolder("CSIDL_MYPICTURES"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} videos directory tied to the user, e.g. `%USERPROFILE%\Videos`
+	 * @return videos directory tied to the user, e.g. `%USERPROFILE%\Videos`
 	 */
-	get userVideosDir() {
+	override get userVideosDir(): string {
 		return path.normalize(getWinFolder("CSIDL_MYVIDEO"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} music directory tied to the user, e.g. `%USERPROFILE%\Music`
+	 * @return music directory tied to the user, e.g. `%USERPROFILE%\Music`
 	 */
-	get userMusicDir() {
+	override get userMusicDir(): string {
 		return path.normalize(getWinFolder("CSIDL_MYMUSIC"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} desktop directory tied to the user, e.g. `%USERPROFILE%\Desktop`
+	 * @return desktop directory tied to the user, e.g. `%USERPROFILE%\Desktop`
 	 */
-	get userDesktopDir() {
+	override get userDesktopDir(): string {
 		return path.normalize(getWinFolder("CSIDL_DESKTOPDIRECTORY"));
 	}
 
 	/**
-	 * @override
-	 * @return {string} runtime directory tied to the user, e.g. `%USERPROFILE%\AppData\Local\Temp\$appauthor\$appname`
+	 * @return runtime directory tied to the user, e.g. `%USERPROFILE%\AppData\Local\Temp\$appauthor\$appname`
 	 */
-	get userRuntimeDir() {
+	override get userRuntimeDir(): string {
 		const path2 = path.normalize(
 			path.join(getWinFolder("CSIDL_LOCAL_APPDATA"), "Temp"),
 		);
@@ -177,20 +156,17 @@ export class Windows extends PlatformDirsABC {
 	}
 
 	/**
-	 * @override
-	 * @return {string} runtime directory shared by users, same as `userRuntimeDir`
+	 * @return runtime directory shared by users, same as `userRuntimeDir`
 	 */
-	get siteRuntimeDir() {
+	override get siteRuntimeDir(): string {
 		return this.userRuntimeDir;
 	}
 }
 
 /**
  * Get folder from environment variable
- * @param {string} csidlName
- * @return {string}
  */
-function getWinFolderFromEnvVars(csidlName) {
+function getWinFolderFromEnvVars(csidlName: string): string {
 	let result = getWinFolderIfCSIDLNameNotEnvVar(csidlName);
 	if (result !== undefined) {
 		return result;
@@ -219,10 +195,8 @@ function getWinFolderFromEnvVars(csidlName) {
 
 /**
  * Get a folder for a CSIDL name that does not exist as an environment variable.
- * @param {string} csidlName
- * @return {string | undefined}
  */
-function getWinFolderIfCSIDLNameNotEnvVar(csidlName) {
+function getWinFolderIfCSIDLNameNotEnvVar(csidlName: string): string | undefined {
 	if (csidlName === "CSIDL_PERSONAL") {
 		const p = process.env.USERPROFILE;
 		if (p === undefined) {
@@ -269,10 +243,7 @@ function getWinFolderIfCSIDLNameNotEnvVar(csidlName) {
 //   throw new Error("Not implemented");
 // }
 
-/**
- * @returns {(csidlName: string) => string}
- */
-function pickGetWinFolder() {
+function pickGetWinFolder(): (csidlName: string) => string {
 	return getWinFolderFromEnvVars;
 }
 

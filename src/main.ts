@@ -4,9 +4,8 @@
  * Main entry point.
  */
 
-import { PlatformDirs, version } from "./index.js";
+import { PlatformDirs, version } from "./index.ts";
 
-/** @type {Record<string, keyof PlatformDirs>} */
 const props = {
 	user_data_dir: "userDataDir",
 	user_config_dir: "userConfigDir",
@@ -23,7 +22,7 @@ const props = {
 	site_config_dir: "siteConfigDir",
 	site_cache_dir: "siteCacheDir",
 	site_runtime_dir: "siteRuntimeDir",
-};
+} as const;
 
 const appName = "MyApp";
 const appAuthor = "MyCompany";

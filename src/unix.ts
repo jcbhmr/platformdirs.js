@@ -7,11 +7,10 @@ import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
 import process from "node:process";
-import { PlatformDirsABC } from "./api.js";
-import { ConfigParser } from "./configparser.js";
+import { PlatformDirsABC } from "./api.ts";
+import { ConfigParser } from "./configparser.ts";
 
-/** @return {number} */
-function getuid() {
+function getuid(): number {
 	if (!process.getuid) {
 		throw new Error("should only be used on Unix");
 	}
@@ -31,10 +30,9 @@ function getuid() {
  */
 export class Unix extends PlatformDirsABC {
 	/**
-	 * @return {string} data directory tied to the user, e.g. `~/.local/share/$appname/$version` or `$XDG_DATA_HOME/$appname/$version`
-	 * @override
+	 * @return data directory tied to the user, e.g. `~/.local/share/$appname/$version` or `$XDG_DATA_HOME/$appname/$version`
 	 */
-	get userDataDir() {
+	override get userDataDir(): string {
 		let path2 = process.env.XDG_DATA_HOME ?? "";
 		if (!path2.trim()) {
 			path2 = path.join(os.homedir(), ".local/share");
@@ -43,10 +41,9 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string[]}
-	 * @protected @ignore @internal
+	 * @ignore @internal
 	 */
-	get _siteDataDirs() {
+	protected get _siteDataDirs(): string[] {
 		let path2 = process.env.XDG_DATA_DIRS ?? "";
 		if (!path2.trim()) {
 			path2 = `/usr/local/share${path.delimiter}/usr/share`;
@@ -57,14 +54,13 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} data directories shared by users (if
+	 * @return data directories shared by users (if
 	 * {@link PlatformDirsABC.multipath} is enabled and `XDG_DATA_DIRS` is and a
 	 * multi path the response is also a multi path separated by the OS path
 	 * separator), e.g.
 	 * `/usr/local/share/$appname/$version:/usr/share/$appname/$version`
-	 * @override
 	 */
-	get siteDataDir() {
+	override get siteDataDir(): string {
 		const dirs = this._siteDataDirs;
 		if (!this.multipath) {
 			return dirs[0];
@@ -73,10 +69,9 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} config directory tied to the user, e.g. `~/.config/$appname/$version` or `$XDG_CONFIG_HOME/$appname/$version`
-	 * @override
+	 * @return config directory tied to the user, e.g. `~/.config/$appname/$version` or `$XDG_CONFIG_HOME/$appname/$version`
 	 */
-	get userConfigDir() {
+	override get userConfigDir(): string {
 		let path2 = process.env.XDG_CONFIG_HOME ?? "";
 		if (!path2.trim()) {
 			path2 = path.join(os.homedir(), ".config");
@@ -85,10 +80,9 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string[]}
 	 * @ignore @internal
 	 */
-	get _siteConfigDirs() {
+	protected get _siteConfigDirs(): string[] {
 		let path2 = process.env.XDG_CONFIG_DIRS ?? "";
 		if (!path2.trim()) {
 			path2 = "/etc/xdg";
@@ -99,13 +93,12 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} config directories shared by users (if
+	 * @return config directories shared by users (if
 	 * {@link PlatformDirsABC.multipath} is enabled and `XDG_CONFIG_DIRS` is and
 	 * a multi path the response is also a multi path separated by the OS path
 	 * separator), e.g. `/etc/xdg/$appname/$version`
-	 * @override
 	 */
-	get siteConfigDir() {
+	override get siteConfigDir(): string {
 		const dirs = this._siteConfigDirs;
 		if (!this.multipath) {
 			return dirs[0];
@@ -114,10 +107,9 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} cache directory tied to the user, e.g. `~/.cache/$appname/$version` or `$XDG_CACHE_HOME/$appname/$version`
-	 * @override
+	 * @return cache directory tied to the user, e.g. `~/.cache/$appname/$version` or `$XDG_CACHE_HOME/$appname/$version`
 	 */
-	get userCacheDir() {
+	override get userCacheDir(): string {
 		let path2 = process.env.XDG_CACHE_HOME ?? "";
 		if (!path2.trim()) {
 			path2 = path.join(os.homedir(), ".cache");
@@ -126,18 +118,16 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} cache directory shared by users, e.g. `/var/cache/$appname/$version`
-	 * @override
+	 * @return cache directory shared by users, e.g. `/var/cache/$appname/$version`
 	 */
-	get siteCacheDir() {
+	override get siteCacheDir(): string {
 		return this._appendAppNameAndVersion("/var/cache");
 	}
 
 	/**
-	 * @return {string} state directory tied to the user, e.g. `~/.local/state/$appname/$version` or `$XDG_STATE_HOME/$appname/$version`
-	 * @override
+	 * @return state directory tied to the user, e.g. `~/.local/state/$appname/$version` or `$XDG_STATE_HOME/$appname/$version`
 	 */
-	get userStateDir() {
+	override get userStateDir(): string {
 		let path2 = process.env.XDG_STATE_HOME ?? "";
 		if (!path2.trim()) {
 			path2 = path.join(os.homedir(), ".local/state");
@@ -146,10 +136,9 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} log directory tied to the user, same as `userCacheDir` if not opinionated else `log` in it.
-	 * @override
+	 * @return log directory tied to the user, same as `userCacheDir` if not opinionated else `log` in it.
 	 */
-	get userLogDir() {
+	override get userLogDir(): string {
 		let path2 = this.userStateDir;
 		if (this.opinion) {
 			path2 = path.join(path2, "log");
@@ -159,60 +148,53 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} documents directory tied to the user, e.g. `~/Documents`
-	 * @override
+	 * @return documents directory tied to the user, e.g. `~/Documents`
 	 */
-	get userDocumentsDir() {
+	override get userDocumentsDir(): string {
 		return getUserMediaDir("XDG_DOCUMENTS_DIR", "~/Documents");
 	}
 
 	/**
-	 * @return {string} downloads directory tied to the user, e.g. `~/Downloads`
-	 * @override
+	 * @return downloads directory tied to the user, e.g. `~/Downloads`
 	 */
-	get userDownloadsDir() {
+	override get userDownloadsDir(): string {
 		return getUserMediaDir("XDG_DOWNLOAD_DIR", "~/Downloads");
 	}
 
 	/**
-	 * @return {string} pictures directory tied to the user, e.g. `~/Pictures`
-	 * @override
+	 * @return pictures directory tied to the user, e.g. `~/Pictures`
 	 */
-	get userPicturesDir() {
+	override get userPicturesDir(): string {
 		return getUserMediaDir("XDG_PICTURES_DIR", "~/Pictures");
 	}
 
 	/**
-	 * @return {string} videos directory tied to the user, e.g. `~/Videos`
-	 * @override
+	 * @return videos directory tied to the user, e.g. `~/Videos`
 	 */
-	get userVideosDir() {
+	override get userVideosDir(): string {
 		return getUserMediaDir("XDG_VIDEOS_DIR", "~/Videos");
 	}
 
 	/**
-	 * @return {string} music directory tied to the user, e.g. `~/Music`
-	 * @override
+	 * @return music directory tied to the user, e.g. `~/Music`
 	 */
-	get userMusicDir() {
+	override get userMusicDir(): string {
 		return getUserMediaDir("XDG_MUSIC_DIR", "~/Music");
 	}
 
 	/**
-	 * @return {string} desktop directory tied to the user, e.g. `~/Desktop`
-	 * @override
+	 * @return desktop directory tied to the user, e.g. `~/Desktop`
 	 */
-	get userDesktopDir() {
+	override get userDesktopDir(): string {
 		return getUserMediaDir("XDG_DESKTOP_DIR", "~/Desktop");
 	}
 
 	/**
-	 * @return {string} runtime directory tied to the user, e.g. `/run/user/$(id -u)/$appname/$version` or `$XDG_RUNTIME_DIR/$appname/$version`.
+	 * @return runtime directory tied to the user, e.g. `/run/user/$(id -u)/$appname/$version` or `$XDG_RUNTIME_DIR/$appname/$version`.
 	 *
 	 * For FreeBSD/OpenBSD/NetBSD, it would return `/var/run/user/$(id -u)/$appname/$version` if it exists, otherwise `/tmp/runtime-$(id -u)/$appname/$version`, if `XDG_RUNTIME_DIR` is not set.
-	 * @override
 	 */
-	get userRuntimeDir() {
+	override get userRuntimeDir(): string {
 		let path2 = process.env.XDG_RUNTIME_DIR ?? "";
 		if (!path2.trim()) {
 			if (
@@ -232,16 +214,15 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} runtime directory shared by users, e.g. `/run/$appname/$version` or `$XDG_RUNTIME_DIR/$appname/$version`.
+	 * @return runtime directory shared by users, e.g. `/run/$appname/$version` or `$XDG_RUNTIME_DIR/$appname/$version`.
 	 *
 	 * Note that this behaves almost exactly like `userRuntimeDir` if `XDG_RUNTIME_DIR` is set, but will fall back to paths associated to the root user isntead of a regular logged-in user if it's not set.
 	 *
 	 * If you wish to ensure that a logged-in user path is returned e.g. `/run/user/0`, use `userRuntimeDir` instead.
 	 *
 	 * For FreeBSD/OpenBSD/NetBSD, it would return `/var/run/$appname/$version` if `XDG_RUNTIME_DIR` is not set.
-	 * @override
 	 */
-	get siteRuntimeDir() {
+	override get siteRuntimeDir(): string {
 		let path2 = process.env.XDG_RUNTIME_DIR ?? "";
 		if (!path2.trim()) {
 			if (
@@ -258,58 +239,46 @@ export class Unix extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} data path shared by users. Only return the first item, even if `multipath` is set to `true`.
-	 * @override
+	 * @return data path shared by users. Only return the first item, even if `multipath` is set to `true`.
 	 */
-	get siteDataPath() {
+	override get siteDataPath(): string {
 		return this._firstItemAsPathIfMultipath(this.siteDataDir);
 	}
 
 	/**
-	 * @return {string} config path shared by users. Only return the first item, even if `multipath` is set to `true`.
-	 * @override
+	 * @return config path shared by users. Only return the first item, even if `multipath` is set to `true`.
 	 */
-	get siteConfigPath() {
+	override get siteConfigPath(): string {
 		return this._firstItemAsPathIfMultipath(this.siteConfigDir);
 	}
 
 	/**
-	 * @return {string} cache path shared by users. Only return the first item, even if `multipath` is set to `true`.
-	 * @override
+	 * @return cache path shared by users. Only return the first item, even if `multipath` is set to `true`.
 	 */
-	get siteCachePath() {
+	override get siteCachePath(): string {
 		return this._firstItemAsPathIfMultipath(this.siteCacheDir);
 	}
 
 	/**
 	 * @yields all user and site configuation directories
-	 * @return {Generator<string>}
-	 * @override
 	 */
-	*iterConfigDirs() {
+	override *iterConfigDirs(): Generator<string> {
 		yield this.userConfigDir;
 		yield* this._siteConfigDirs;
 	}
 
 	/**
 	 * @yields all user and site data directories
-	 * @return {Generator<string>}
-	 * @override
 	 */
-	*iterDataDirs() {
+	override *iterDataDirs(): Generator<string> {
 		yield this.userDataDir;
 		yield* this._siteDataDirs;
 	}
 }
 
-/**
- * @param {string} envVar
- * @param {string} fallbackTildePath
- * @returns {string}
- */
-function getUserMediaDir(envVar, fallbackTildePath) {
+function getUserMediaDir(envVar: string, fallbackTildePath: string): string {
 	let mediaDir = getUserDirsFolder(envVar);
-	if (mediaDir === undefined) {
+	if (mediaDir == null) {
 		mediaDir = (process.env[envVar] ?? "").trim();
 		if (!mediaDir) {
 			mediaDir = fallbackTildePath.replace(/^~/, os.homedir());
@@ -322,28 +291,28 @@ function getUserMediaDir(envVar, fallbackTildePath) {
  * Return directory from user-dirs.dirs config file.
  *
  * See https://freedesktop.org/wiki/Software/xdg-user-dirs/.
- * 
- * ⚠️ This function uses **synchronous FS operations**.
  *
- * @param {string} key
- * @returns {string | undefined}
+ * ⚠️ This function uses **synchronous FS operations**.
  */
-function getUserDirsFolder(key) {
-	const userDirsConfigPath = path.join(new Unix().userConfigDir, "user-dirs.dirs");
+function getUserDirsFolder(key: string): string | undefined {
+	const userDirsConfigPath = path.join(
+		new Unix().userConfigDir,
+		"user-dirs.dirs",
+	);
 	if (fs.existsSync(userDirsConfigPath)) {
 		// This works for now.
-	    const parser = new ConfigParser()
+		const parser = new ConfigParser();
 
-	    const read = fs.readFileSync(userDirsConfigPath, "utf-8")
-	    parser.readString(`[top]\n${read}`)
+		const read = fs.readFileSync(userDirsConfigPath, "utf-8");
+		parser.readString(`[top]\n${read}`);
 
 		const top = parser.get("top");
-	    if (!top || !(Object.hasOwn(top, key))) {
-	        return undefined
-	    }
+		if (!top || !Object.hasOwn(top, key)) {
+			return undefined;
+		}
 
-	    const path2 = top[key].replace(/(^"|"$)/g, "")
-	    return path2.replace("$HOME", os.homedir())
+		const path2 = top[key].replace(/(^"|"$)/g, "");
+		return path2.replace("$HOME", os.homedir());
 	}
 
 	return undefined;

@@ -6,7 +6,7 @@
 import * as os from "node:os";
 import * as path from "node:path";
 import process from "node:process";
-import { PlatformDirsABC } from "./api.js";
+import { PlatformDirsABC } from "./api.ts";
 
 /**
  * Platform directories for the macOS operating system.
@@ -15,17 +15,16 @@ import { PlatformDirsABC } from "./api.js";
  */
 export class MacOS extends PlatformDirsABC {
 	/**
-	 * @return {string} data directory tied to the user, e.g. `~/Library/Application Support/$appname/$version`
-	 * @override
+	 * @return data directory tied to the user, e.g. `~/Library/Application Support/$appname/$version`
 	 */
-	get userDataDir() {
+	override get userDataDir(): string {
 		return this._appendAppNameAndVersion(
 			path.join(os.homedir(), "Library/Application Support"),
 		);
 	}
 
 	/**
-	 * @return {string} data directory shared by users, e.g. `/Library/Application
+	 * @return data directory shared by users, e.g. `/Library/Application
 	 * Support/$appname/$version`. If we're using a Node.js, Deno, or Bun binary
 	 * managed by [Homebrew](https://brew.sh), the directory will be under the
 	 * Homebrew prefix, e.g. `/opt/homebrew/share/$appname/$version`. If
@@ -33,9 +32,8 @@ export class MacOS extends PlatformDirsABC {
 	 * response is a multi-path string separated by ":", e.g.
 	 * `/opt/homebrew/share/$appname/$version:/Library/Application
 	 * Support/$appname/$version`.
-	 * @override
 	 */
-	get siteDataDir() {
+	override get siteDataDir(): string {
 		const isHomebrew = process.execPath.startsWith("/opt/homebrew");
 		const pathList = isHomebrew
 			? [this._appendAppNameAndVersion("/opt/homebrew/share")]
@@ -50,49 +48,44 @@ export class MacOS extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} data path shared by users. Only return the first item, even if
+	 * @return data path shared by users. Only return the first item, even if
 	 * `multipath` is enabled is set to `true`.
-	 * @override
 	 */
-	get siteDataPath() {
+	override get siteDataPath(): string {
 		return this._firstItemAsPathIfMultipath(this.siteDataDir);
 	}
 
 	/**
-	 * @return {string} config directory tied to the user, same as `userDataDir`
-	 * @override
+	 * @return config directory tied to the user, same as `userDataDir`
 	 */
-	get userConfigDir() {
+	override get userConfigDir(): string {
 		return this.userDataDir;
 	}
 
 	/**
-	 * @return {string} config directory shared by users, same as `siteDataDir`
-	 * @override
+	 * @return config directory shared by users, same as `siteDataDir`
 	 */
-	get siteConfigDir() {
+	override get siteConfigDir(): string {
 		return this.siteDataDir;
 	}
 
 	/**
-	 * @return {string} cache directory tied to the user, e.g. `~/Library/Caches/$appname/$version`
-	 * @override
+	 * @return cache directory tied to the user, e.g. `~/Library/Caches/$appname/$version`
 	 */
-	get userCacheDir() {
+	override get userCacheDir(): string {
 		return this._appendAppNameAndVersion(
 			path.join(os.homedir(), "Library/Caches"),
 		);
 	}
 
 	/**
-	 * @return {string} cache directory shared by users, e.g. `/Library/Caches/$appname/$version`.
+	 * @return cache directory shared by users, e.g. `/Library/Caches/$appname/$version`.
 	 * If we're using a Node.js, Deno, or Bun binary managed by [Homebrew](https://brew.sh),
 	 * the directory will be under the Homebrew prefix, e.g. `/opt/homebrew/var/cache/$appname/$version`.
 	 * If {@link PlatformDirsABC.multipath} is enabled, and we're in Homebrew, the response is a multi-path string separated by ":", e.g.
 	 * `/opt/homebrew/var/cache/$appname/$version:/Library/Caches/$appname/$version`.
-	 * @override
 	 */
-	get siteCacheDir() {
+	override get siteCacheDir(): string {
 		const isHomebrew = process.execPath.startsWith("/opt/homebrew");
 		const pathList = isHomebrew
 			? [this._appendAppNameAndVersion("/opt/homebrew/var/cache")]
@@ -105,95 +98,84 @@ export class MacOS extends PlatformDirsABC {
 	}
 
 	/**
-	 * @return {string} cache path shared by users. Only return the first item, even if
+	 * @return cache path shared by users. Only return the first item, even if
 	 * `multipath` is enabled is set to `true`.
-	 * @override
 	 */
-	get siteCachePath() {
+	override get siteCachePath(): string {
 		return this._firstItemAsPathIfMultipath(this.siteCacheDir);
 	}
 
 	/**
-	 * @return {string} state directory tied to the user, e.g. `~/Library/Application Support/$appname/$version`
-	 * @override
+	 * @return state directory tied to the user, e.g. `~/Library/Application Support/$appname/$version`
 	 */
-	get userStateDir() {
+	override get userStateDir(): string {
 		return this.userDataDir;
 	}
 
 	/**
-	 * @return {string} log directory tied to the user, e.g. `~/Library/Logs/$appname/$version`
-	 * @override
+	 * @return log directory tied to the user, e.g. `~/Library/Logs/$appname/$version`
 	 */
-	get userLogDir() {
+	override get userLogDir(): string {
 		return this._appendAppNameAndVersion(
 			path.join(os.homedir(), "Library/Logs"),
 		);
 	}
 
 	/**
-	 * @return {string} documents directory tied to the user, e.g. `~/Documents`
-	 * @override
+	 * @return documents directory tied to the user, e.g. `~/Documents`
 	 */
-	get userDocumentsDir() {
+	override get userDocumentsDir(): string {
 		return path.join(os.homedir(), "Documents");
 	}
 
 	/**
-	 * @return {string} downloads directory tied to the user, e.g. `~/Downloads`
-	 * @override
+	 * @return downloads directory tied to the user, e.g. `~/Downloads`
 	 */
-	get userDownloadsDir() {
+	override get userDownloadsDir(): string {
 		return path.join(os.homedir(), "Downloads");
 	}
 
 	/**
-	 * @return {string} pictures directory tied to the user, e.g. `~/Pictures`
-	 * @override
+	 * @return pictures directory tied to the user, e.g. `~/Pictures`
 	 */
-	get userPicturesDir() {
+	override get userPicturesDir(): string {
 		return path.join(os.homedir(), "Pictures");
 	}
 
 	/**
-	 * @return {string} videos directory tied to the user, e.g. `~/Movies`
-	 * @override
+	 * @return videos directory tied to the user, e.g. `~/Movies`
 	 */
-	get userVideosDir() {
+	override get userVideosDir(): string {
 		return path.join(os.homedir(), "Movies");
 	}
 
 	/**
-	 * @return {string} music directory tied to the user, e.g. `~/Music`
-	 * @override
+	 * @return music directory tied to the user, e.g. `~/Music`
 	 */
-	get userMusicDir() {
+	override get userMusicDir(): string {
 		return path.join(os.homedir(), "Music");
 	}
 
 	/**
-	 * @return {string} desktop directory tied to the user, e.g. `~/Desktop`
-	 * @override
+	 * @return desktop directory tied to the user, e.g. `~/Desktop`
 	 */
-	get userDesktopDir() {
+	override get userDesktopDir(): string {
 		return path.join(os.homedir(), "Desktop");
 	}
 
 	/**
-	 * @return {string} runtime directory tied to the user, e.g. `~/Library/Caches/TemporaryItems`
-	 * @override
+	 * @return runtime directory tied to the user, e.g. `~/Library/Caches/TemporaryItems`
 	 */
-	get userRuntimeDir() {
+	override get userRuntimeDir(): string {
 		return this._appendAppNameAndVersion(
 			path.join(os.homedir(), "Library/Caches/TemporaryItems"),
 		);
 	}
 
 	/**
-	 * @return {string} runtime directory shared by users, same as `userRuntimeDir`
-	 * @override
+	 * @return runtime directory shared by users, same as `userRuntimeDir`
 	 */
-	get siteRuntimeDir() {
+	override get siteRuntimeDir(): string {
 		return this.userRuntimeDir;
 	}
 }

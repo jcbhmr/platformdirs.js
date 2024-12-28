@@ -1,6 +1,6 @@
 {
 	"name": "platformdirs",
-	"version": "4.3.8-rc1",
+	"version": "4.3.8-rc2",
 	"description": "📂 Unified interface to get platform-specific directories",
 	"keywords": [
 		"nodejs",
@@ -22,22 +22,24 @@
 	"author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me)",
 	"type": "module",
 	"exports": {
-		".": "./src/index.js",
-		"./android": "./src/android.js",
-		"./api": "./src/api.js",
-		"./macos": "./src/macos.js",
-		"./unix": "./src/unix.js",
-		"./version": "./src/version.js"
+		".": "./dist/index.js",
+		"./android": "./dist/android.js",
+		"./api": "./dist/api.js",
+		"./macos": "./dist/macos.js",
+		"./unix": "./dist/unix.js",
+		"./version": "./dist/version.js"
 	},
 	"bin": {
-		"platformdirs": "src/main.js"
+		"platformdirs": "dist/main.js"
 	},
-	"files": ["src"],
+	"files": ["dist"],
 	"scripts": {
 		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
-		"run": "node src/main.js",
-		"test": "node --test"
+		"run": "node --experimental-transform-types src/main.ts",
+		"test": "node --experimental-transform-types --test",
+		"build": "tsc --noCheck",
+		"prepack": "npm run build"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
