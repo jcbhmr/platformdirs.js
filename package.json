@@ -1,6 +1,6 @@
 {
 	"name": "platformdirs",
-	"version": "4.3.8-rc2",
+	"version": "4.3.8-rc3",
 	"description": "📂 Unified interface to get platform-specific directories",
 	"keywords": [
 		"nodejs",
@@ -29,17 +29,18 @@
 		"./unix": "./dist/unix.js",
 		"./version": "./dist/version.js"
 	},
+	"types": "dist/index.d.ts",
 	"bin": {
 		"platformdirs": "dist/main.js"
 	},
 	"files": ["dist"],
 	"scripts": {
+		"build": "tsc --noCheck",
 		"format": "biome format --write .",
 		"lint": "biome check --write . && tsc --noEmit",
-		"run": "node --experimental-transform-types src/main.ts",
-		"test": "node --experimental-transform-types --test",
-		"build": "tsc --noCheck",
-		"prepack": "npm run build"
+		"prepack": "npm run build",
+		"platformdirs": "node --experimental-transform-types src/main.ts",
+		"test": "node --experimental-transform-types --test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",

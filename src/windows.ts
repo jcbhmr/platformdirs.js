@@ -26,7 +26,10 @@ export class Windows extends PlatformDirsABC {
 		return this._appendParts(path2);
 	}
 
-	protected _appendParts(path2: string, { opinionValue }: { opinionValue?: string | undefined; } = {}): string {
+	protected _appendParts(
+		path2: string,
+		{ opinionValue }: { opinionValue?: string | undefined } = {},
+	): string {
 		const params = [];
 		if (this.appname) {
 			if (this.appauthor !== false) {
@@ -196,7 +199,9 @@ function getWinFolderFromEnvVars(csidlName: string): string {
 /**
  * Get a folder for a CSIDL name that does not exist as an environment variable.
  */
-function getWinFolderIfCSIDLNameNotEnvVar(csidlName: string): string | undefined {
+function getWinFolderIfCSIDLNameNotEnvVar(
+	csidlName: string,
+): string | undefined {
 	if (csidlName === "CSIDL_PERSONAL") {
 		const p = process.env.USERPROFILE;
 		if (p === undefined) {

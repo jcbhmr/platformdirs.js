@@ -14,6 +14,8 @@ test("matches python platformdirs", async (t) => {
 	const expected = (
 		await $`uv run --with platformdirs python -m platformdirs`
 	).stdout.replace(/^.*\n/, "");
-	const actual = (await $`node --experimental-transform-types src/main.ts`).stdout.replace(/^.*\n/, "");
+	const actual = (
+		await $`node --experimental-transform-types src/main.ts`
+	).stdout.replace(/^.*\n/, "");
 	assert.equal(actual, expected);
 });
