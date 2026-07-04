@@ -1,0 +1,4 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "updateContentCommand": "curl -fsSL https://vite.plus | bash"
+}
